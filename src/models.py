@@ -29,6 +29,8 @@ class Characters(Base):
     favorites = relationship(Favorites)
     name = Column(String(50), nullable=False)
     url = Column(String(100), nullable=False)
+    homeworld = Column(String(100), nullable=False)
+    height = Column(Integer, nullable=False)
 
 class Planets(Base):
     __tablename__ = 'planets'
@@ -37,20 +39,9 @@ class Planets(Base):
     favorites = relationship(Favorites)
     name = Column(String(50), nullable=False)
     url = Column(String(100), nullable=False)
-
-class CharProperties(Base):
-    __tablename__ = 'charProperties'
-    url = Column(String(100), ForeignKey('characters.url'), primary_key=True, nullable=False)
-    characters = relationship(Characters)
-    homeworld = Column(String(100), nullable=False)
-    height = Column(Integer, nullable=False)
-
-class PlanetProperties(Base):
-    __tablename__ = 'planetProperties'
-    url = Column(String(100), ForeignKey('planets.url'), primary_key=True, nullable=False)
-    planets = relationship(Planets)
     diameter = Column(Integer, nullable=False)
     population = Column(Integer, nullable=False)
+
 
     def to_dict(self):
         return {}
